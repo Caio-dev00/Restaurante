@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "projetoInsider",
+    "slug": "projetoInsider",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
