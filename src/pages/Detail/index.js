@@ -3,6 +3,9 @@ import { View, Text, StyleSheet, Pressable, ScrollView, Image } from "react-nati
 import { useRoute, useNavigation } from "@react-navigation/native";
 import {Entypo, AntDesign, Feather} from '@expo/vector-icons'
 
+import { Ingredientes } from "../../components/Ingredientes";
+import { Instructions } from "../../components/Instructions";
+
 export default function Detail(){
     const route = useRoute();
     const navigation = useNavigation();
@@ -25,9 +28,15 @@ export default function Detail(){
         })
     }, [navigation, data])
 
+
+    function handleOpenVideo(){
+        alert('PEGOU')
+    }
+
     return(
-        <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-            <Pressable>
+        <ScrollView contentContainerStyle={{paddingBottom: 14}} style={styles.container} showsVerticalScrollIndicator={false}>
+
+            <Pressable onPress={handleOpenVideo}>
                 <View style={styles.playIcon}>
                     <AntDesign name="playcircleo" size={44} color="#FAFAFA"/>
                 </View>
@@ -46,6 +55,20 @@ export default function Detail(){
                     <Feather name="share-2" size={24} color="#121212"/>
                 </Pressable>
             </View>
+
+            {data.ingredients.map((item) => (
+                <Ingredientes key={item.id} data={item}/>
+            ))}
+
+            <View style={styles.instructionsArea}>
+                <Text style={styles.instructionsText}>Modo de Preaparo</Text>
+                <Feather name="arrow-down" size={24} color="#FFF"/>
+            </View>
+
+
+            {data.instructions.map((item, index) => (
+                <Instructions key={item.id} data={item} index={index}/>
+            ))}
 
         </ScrollView>
     )
@@ -90,4 +113,19 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         marginBottom: 14,
     },
+
+    instructionsArea: {
+        backgroundColor: '#4cbe6c',
+        flexDirection: 'row',
+        padding: 8,
+        borderRadius: 4,
+        marginBottom: 4
+    },
+
+    instructionsText: {
+        fontSize: 16,
+        fontWeight: 500,
+        color: '#FFF',
+        marginRight: 8
+    }
 })
