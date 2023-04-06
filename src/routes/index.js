@@ -26,10 +26,10 @@ export default function Routes(){
             }
         }}>
             <Tab.Screen
-                name="Home"
+                name="StackRoute"
                 component={StackRoutes}
                 options={{
-                    tabBarIcon: ({color, size, focused}) => {
+                    tabBarIcon: ({size, focused}) => {
                         if(focused) {
                             return <Ionicons name="home" color="#000" size={size}/>
                         }
@@ -44,7 +44,7 @@ export default function Routes(){
                 name="Favorites"
                 component={Favorites}
                 options={{
-                    tabBarIcon: ({color, size, focused}) => {
+                    tabBarIcon: ({size, focused}) => {
                         if(focused) {
                             return <Ionicons name="heart" color="#FF4141" size={size}/>
                         }
