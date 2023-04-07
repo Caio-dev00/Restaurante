@@ -1,14 +1,19 @@
 import React, {useState, useEffect} from "react";
 import { View, Text, StyleSheet, SafeAreaView, TextInput, TouchableOpacity,FlatList } from "react-native";
 import {Ionicons} from '@expo/vector-icons';
+import {Text as MotiText} from 'moti';
 
 import Logo from "../../components/Logo";
 import Foods from "../../components/Foods";
 import api from '../../services/api'
 
+import { useNavigation } from "@react-navigation/native";
+
 export default function Home(){
     const [inputValue, setInputValue] = useState('');
     const [receitas, setReceitas] = useState([]);
+
+    const navigation = useNavigation();
 
     useEffect(() => {
 
@@ -23,14 +28,46 @@ export default function Home(){
 
 
     function handleSearch(){
-        alert('Você clicou nesse botão')
+        if(!inputValue) return;
+
+        let input = inputValue;
+        navigation.navigate('Search', {name: input});
+        setInputValue('');
     }
 
     return(
         <SafeAreaView style={styles.container}>
             <Logo/>
-            <Text style={styles.title}>Encontre a receita</Text>
-            <Text style={styles.title}>que combina com você</Text>
+            <MotiText 
+            from={{
+                opacity: 0,
+                translateY: 15,
+            }}
+            animate={{
+                opacity: 1,
+                translateY: 0
+            }}
+            transition={{
+                delay: 100,
+                type: "timing",
+                duration: 650
+            }}
+            style={styles.title}>Encontre a receita</MotiText>
+            <MotiText
+              from={{
+                opacity: 0,
+                translateY: 15,
+            }}
+            animate={{
+                opacity: 1,
+                translateY: 0
+            }}
+            transition={{
+                delay: 200,
+                type: "timing",
+                duration: 850
+            }}
+            style={styles.title}>que combina com você</MotiText>
 
 
             <View style={styles.form}>
